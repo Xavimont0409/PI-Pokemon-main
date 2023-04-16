@@ -3,7 +3,6 @@ const axios = require("axios");
 
 const getAllTypes = async () => {
   const baseDtypes = await Type.findAll();
-  console.log(baseDtypes);
 
   if (baseDtypes.length === 0) {
     const allTypes = await axios.get("https://pokeapi.co/api/v2/type");

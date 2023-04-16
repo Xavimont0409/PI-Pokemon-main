@@ -54,14 +54,14 @@ const getPokemonId = async (id, source) => {
 
 //* Trae todos los pokemons
 const getAllPokemon = async () => {
-  
+  //!API
   const allPokemons = (await axios.get(`https://pokeapi.co/api/v2/pokemon/?offset=0&limit=60`)).data.results
   const promesaTodo = await Promise.all(
     allPokemons.map(async(poke)=>{
       return await promesaName(poke.name)
     })
   )
-    console.log(promesaTodo);
+  //! BD
   const allPokemonsData = await Pokemon.findAll({
     include:{
       model: Type,
@@ -71,8 +71,25 @@ const getAllPokemon = async () => {
       }
     }
   })
-  return allPokemonsData.concat(...promesaTodo)
+  //!LIMPIADOR
+  const cleanTypes = allPokemonsData.map((pokemon) =>{
+    const dbType = {
+      id : pokemon.id,
+      name : pokemon.name,
+      image : pokemon.image,
+      life: pokemon.life,
+      attack: pokemon.attack,
+      defense: pokemon.defense,
+      speed: pokemon.speed,
+      height: pokemon.height,
+      weight: pokemon.weight,
+      types: pokemon.Types.map(t => t.name),
+      created : true
+    }
+    return dbType
+  })
 
+  return cleanTypes.concat(...promesaTodo)
 };
 
 //* Trae pokemons por NAME

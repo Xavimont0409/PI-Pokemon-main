@@ -1,9 +1,8 @@
 //!IMPORTAR CONTROLLERS
 const getAllTypes = require('../controllers/typerControllers')
-const { Type } = require('../db.js')
 
 
-const typesHandler =async (req,res) =>{
+const typesHandler = async (req,res) =>{
     try {
         res.status(200).json( await getAllTypes())    
     } catch (error) {
