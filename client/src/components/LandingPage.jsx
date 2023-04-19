@@ -1,4 +1,5 @@
 import "../styles/LandingPage.css";
+import { Link } from "react-router-dom";
 
 const LandingPage = () => {
   return (
@@ -6,8 +7,10 @@ const LandingPage = () => {
       <div>
         <h1>Hola Mundo</h1>
         <div>
-        
-      </div>
+          <Link to="/home">
+            <button>INGRESAR</button>
+          </Link>
+        </div>
       </div>
     </div>
   );

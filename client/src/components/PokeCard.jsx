@@ -12,7 +12,7 @@ const PokeCard = ({ id, name, image, types }) => {
           <h1 className="pokeName">{name}</h1>
         </div>
         <div className="typeCard">
-          <p>{types}</p> 
+          <ul>{types.map((type)=> <li key={type} >{type}</li>)}</ul> 
         </div>
       </div>
     </Link>

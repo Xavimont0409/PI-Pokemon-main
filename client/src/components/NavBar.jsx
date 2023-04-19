@@ -1,8 +1,14 @@
+import "../styles/Navbar1.css"
 import { Link } from "react-router-dom";
+import SearchBar from "./SearchBar";
+import FiltroAttack from "./FiltroAttack";
+import FiltroName from "./FiltroName";
+import FilterTypes from "./FilterType";
+import FilterCreated from "./FilterCreated";
 
-const NavBar = () => {
+const NavBar = ({ setCurrentPag, setOrderRating, orderRating, setOrderName}) => {
   return (
-    <nav>
+    <nav className="navbar" >
       <div>
         <h1>Logo</h1>
       </div>
@@ -11,9 +17,11 @@ const NavBar = () => {
           <h2>HOME</h2>
         </Link>
         <h2>CREATE POKEON</h2>
-        <h3>Filtro Name</h3>
-        <h3>Filtro Attack</h3>
-        <h3>Filtro Create</h3>
+        <SearchBar setCurrentPag={setCurrentPag}/>
+        <FiltroAttack setCurrentPag={setCurrentPag} setOrderRating={setOrderRating} orderRating={orderRating}/>
+        <FiltroName setCurrentPag={setCurrentPag} setOrderName={setOrderName} />
+        <FilterTypes />
+        <FilterCreated setCurrentPag={setCurrentPag}/>
       </div>
     </nav>
   );

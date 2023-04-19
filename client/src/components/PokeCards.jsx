@@ -1,15 +1,12 @@
-import PokeCard from "./PokeCard";
-import { useSelector } from "react-redux";  
 import '../styles/PokeCards.css'
+import PokeCard from "./PokeCard";  
 
-const PokeCards = () => {
-
-  const  pokemons  = useSelector((state) => state.pokemons);
+const PokeCards = (props) => {
 
   return(
     <div className="cards-container" >
       {
-        pokemons.map((pokemon)=>{
+        props.props.map((pokemon)=>{
           return(
             <PokeCard 
               key={pokemon.id}
