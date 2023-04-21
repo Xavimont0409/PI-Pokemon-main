@@ -1,3 +1,4 @@
+import '../styles/FiltroAttack.css'
 import { useDispatch } from "react-redux";
 import { filterPerAttack } from "../redux/actions/actions";
 
@@ -11,8 +12,8 @@ const FiltroAttack = ({ setCurrentPag, setOrderRating, orderRating }) => {
   };
 
   return (
-    <div>
-      <label htmlFor="up">
+    <div className='container-attack'>
+      <label className='label-attack1' htmlFor="up">
         <input
           type="radio"
           id="up"
@@ -20,17 +21,18 @@ const FiltroAttack = ({ setCurrentPag, setOrderRating, orderRating }) => {
           checked={orderRating === "up"}
           onChange={(event) => handlerFilterAttack(event)}
         />
-        Ascending
+        Ascending Attacks
       </label>
-      <label htmlFor="down">
+      <label className='label-attack2' htmlFor="down">
         <input
+          className='input-radio'
           type="radio"
           id="down"
           name="orderRating"
           checked={orderRating === "down"}
           onChange={(event) => handlerFilterAttack(event)}
         />
-        Descending
+        Descending Attacks
       </label>
     </div>
   );

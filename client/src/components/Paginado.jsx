@@ -7,12 +7,12 @@ const Paginado = ({ pokemons, pokemonsPerPage, paginado }) => {
   }
 
   return (
-    <nav>
+    <nav className="nav-paginado">
       <ul>
         {pagNumber &&
           pagNumber.map((number) =>(
             <li key={number}>
-              <button onClick={()=> paginado(number)}>{number}</button>
+              <button className="button-pag" onClick={()=> paginado(number)}>{number}</button>
             </li>
           ))}
       </ul>

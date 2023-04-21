@@ -11,15 +11,15 @@ const FilterCreated = ({ setCurrentPag }) => {
 
 
   return (
-    <div>
+    <div className="select-name">
       <label>
-        Creado -
         <select onChange={(event)=> handlerFilterCreated(event)}>
-          <option value="All">TODOS</option>
-          <option value="true">En la base de datos</option>
-          <option value="false">En la api</option>
+          <option value="All">All Pokemons</option>
+          <option value="true">Created</option>
+          <option value="false">API</option>
         </select>
       </label>
+      <div className='select_arrow'></div>
     </div>
   );
 };

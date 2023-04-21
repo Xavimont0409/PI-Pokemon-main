@@ -19,11 +19,10 @@ const FilterTypes= () =>{
   }
 
   return (
-    <div>
+    <div className="select-name">
       <label>
-        Por Tipo -
         <select onChange={(event)=>handlerFilterTypes(event)}>
-          <option value="All">Todos</option>
+          <option value="All">Types</option>
           {
             allTypes.map((type)=>
               ( 
@@ -32,6 +31,7 @@ const FilterTypes= () =>{
             )
           }
         </select>
+        <div className='select_arrow'></div>
       </label>
     </div>
   )

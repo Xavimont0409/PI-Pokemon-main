@@ -1,3 +1,4 @@
+import '../styles/FiltroName.css'
 import { useDispatch } from "react-redux";
 import { filterPerName } from "../redux/actions/actions";
 
@@ -12,15 +13,15 @@ const FiltroName = ({ setCurrentPag, setOrderName }) => {
   }
 
   return (
-    <div>
+    <div className="select-name">
       <label>
-        Por Nombre -
-        <select onChange={(event)=> handlerFilterName(event) }>
-          <option value="-">-</option>
-          <option value="up">Ascendente</option>
-          <option value="down">Descendente</option>
+        <select name="format" onChange={(event)=> handlerFilterName(event) }>
+          <option value="-">Name</option>
+          <option value="up">A-Z</option>
+          <option value="down">Z-A</option>
         </select>
       </label>
+      <div className='select_arrow'></div>
     </div>
   );
 };

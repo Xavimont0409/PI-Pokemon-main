@@ -2,6 +2,7 @@ import "../styles/Home.css";
 import NavBar from "./NavBar";
 import PokeCards from "./PokeCards";
 import Paginado from "./Paginado";
+import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { getAllPokemons } from "../redux/actions/actions";
 import { useDispatch, useSelector } from "react-redux";
@@ -32,7 +33,6 @@ const Home = () => {
     setCurrentPag(pageNumber);
   };
 
-
   return (
     <div className="container-home">
       <div>
@@ -44,14 +44,28 @@ const Home = () => {
         />
       </div>
       <div>
-        <Paginado
-          pokemons={pokemons.length}
-          pokemonsPerPage={pokemonsPerPage}
-          paginado={paginado}
-        />
-      </div>
-      <div>
-        <PokeCards props={currentPokemons} />
+        <div>
+          <div className="container-home-create">
+            <div className="home">
+              <Link to="/home">
+                <h2>Home</h2>
+              </Link>
+            </div>
+            <div className="create">
+              <Link to="/create">
+                <h2>Create Pokemon</h2>
+              </Link>
+            </div>
+          </div>
+          <Paginado
+            pokemons={pokemons.length}
+            pokemonsPerPage={pokemonsPerPage}
+            paginado={paginado}
+          />
+        </div>
+        <div>
+          <PokeCards props={currentPokemons} />
+        </div>
       </div>
     </div>
   );
