@@ -35,17 +35,7 @@ const pokemonPosts = async (req, res) => {
   const { name, image, life, attack, defense, speed, height, weight, types } =
     req.body;
   try {
-    const newUser = await addPosts(
-      name,
-      image,
-      life,
-      attack,
-      defense,
-      speed,
-      height,
-      weight,
-      types
-    );
+    const newUser = await addPosts(name, image, life, attack, defense, speed, height, weight, types);
     res.status(201).json(newUser);
   } catch (error) {
     res.status(400).json({ error: error.message });
