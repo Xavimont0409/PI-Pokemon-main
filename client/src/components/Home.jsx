@@ -1,4 +1,5 @@
 import "../styles/Home.css";
+import exit from '../img/exitPokemon.png'
 import NavBar from "./NavBar";
 import PokeCards from "./PokeCards";
 import Paginado from "./Paginado";
@@ -54,6 +55,11 @@ const Home = () => {
             <div className="create">
               <Link to="/create">
                 <h2>Create Pokemon</h2>
+              </Link>
+            </div>
+            <div>
+              <Link to="/">
+              <img className="exit-img" src={exit} alt="" />
               </Link>
             </div>
           </div>

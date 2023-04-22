@@ -8,13 +8,13 @@ import iconGallery from '../img/iconForm/gallery.png'
 import iconKatana from '../img/iconForm/katana.png'
 import iconRunning from '../img/iconForm/running-shoes.png'
 import iconShield from '../img/iconForm/shield.png'
-import iconStar from '../img/iconForm/star.png'
 
 import { validate } from "../validadoForm/validate";
 import { useState, useEffect } from "react";
 import { getAllTypes, postPokemon } from "../redux/actions/actions";
 import { useSelector, useDispatch } from "react-redux";
 import PokeCard from './PokeCard'
+import { Link } from "react-router-dom";
 
 const FormPage = () => {
   const [creatNewPokemon, setCreateNewPokemon] = useState({
@@ -80,7 +80,11 @@ const FormPage = () => {
 
   return (
     <div className="container-allForm">
-      <div><h1>home</h1></div>
+      <div className="nombre-home">
+        <Link to='/home' >
+        <h1>Home</h1>
+        </Link>
+        </div>
       <div className="container-form">
         <form className="form">
           <h3 className="name-form">Create Pokemon</h3>
@@ -93,6 +97,7 @@ const FormPage = () => {
               value={creatNewPokemon.name}
               onChange={handleInputChange}
             />
+            <span className="asterisco" >*</span>
             <img className="icons" src={iconCharmander} alt="" />
             <p>{error.name}</p>
           </div>
@@ -105,6 +110,7 @@ const FormPage = () => {
               value={creatNewPokemon.image}
               onChange={handleInputChange}
             />
+            <span className="asterisco">*</span>
             <img className="icons" src={iconGallery} alt="" />
             <p>{error.image}</p>
           </div>
@@ -117,6 +123,7 @@ const FormPage = () => {
               value={creatNewPokemon.life}
               onChange={handleInputChange}
             />
+            <span className="asterisco">*</span>
             <img className="icons" src={iconDumbbell} alt="" />
             <p>{error.life}</p>
           </div>
@@ -129,6 +136,7 @@ const FormPage = () => {
               value={creatNewPokemon.attack}
               onChange={handleInputChange}
             />
+            <span className="asterisco" >*</span>
             <img className="icons" src={iconKatana} alt="" />
             <p>{error.attack}</p>
           </div>
@@ -141,6 +149,7 @@ const FormPage = () => {
               value={creatNewPokemon.defense}
               onChange={handleInputChange}
             />
+            <span className="asterisco">*</span>
             <img className="icons" src={iconShield} alt="" />
             <p>{error.defense}</p>
           </div>
@@ -185,7 +194,7 @@ const FormPage = () => {
               <select onChange={(event) => handleTypeChange(event)}>
                 <option value="-">Types</option>
                 {allTypes.map((type) => (
-                  <option value={type.name} id={type.id} key={type.id}>
+                  <option value={type.name} key={type.id}>
                     {type.name}
                   </option>
                 ))}
@@ -198,7 +207,7 @@ const FormPage = () => {
       </div>
       <div className="container-cardForm">
         {
-        ( creatNewPokemon.name && creatNewPokemon.image ) ? <PokeCard id={0} name={creatNewPokemon.name} image={creatNewPokemon.image} types={creatNewPokemon.types} />  : <h1>...Cargando</h1>
+        ( creatNewPokemon.name && creatNewPokemon.image ) ? <PokeCard id={0} name={creatNewPokemon.name} image={creatNewPokemon.image} types={creatNewPokemon.types} />  : <span className="loader" >Loading</span>
         }
       </div>
     </div>

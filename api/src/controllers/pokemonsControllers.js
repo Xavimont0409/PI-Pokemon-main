@@ -13,7 +13,8 @@ const addPosts = async (name,image,life,attack,defense,speed,height,weight,types
     height,
     weight,
   });
-  newUser.addType(types);
+  let typesBdd = await Type.findAll({ where: { name: types } })
+  await newUser.addType(typesBdd)
   return newUser;
 };
 

@@ -101,7 +101,6 @@ export const filterPerCreated = (payload) =>{
 export const postPokemon = (payload)=>{
   return async function(dispatch){
     const response = await axios.post("http://localhost:3001/pokemons/", payload)
-    console.log(response);
     return response
   }
 }
