@@ -1,32 +1,32 @@
 //!import css
-import "../styles/DetailPokemon.css";
+import "./DetailPokemon.css";
 //!icons details
-import iconAltura from "../img/iconForm/altura.png";
-import iconBascula from "../img/iconForm/bascula.png";
-import iconDumbbell from "../img/iconForm/dumbbell.png";
-import iconKatana from "../img/iconForm/katana.png";
-import iconRunning from "../img/iconForm/running-shoes.png";
-import iconShield from "../img/iconForm/shield.png";
+import iconAltura from "../../../img/iconForm/altura.png";
+import iconBascula from "../../../img/iconForm/bascula.png";
+import iconDumbbell from "../../../img/iconForm/dumbbell.png";
+import iconKatana from "../../../img/iconForm/katana.png";
+import iconRunning from "../../../img/iconForm/running-shoes.png";
+import iconShield from "../../../img/iconForm/shield.png";
 //!icons types
-import bug from '../img/iconDetail/Bug.ico'
-import dark from '../img/iconDetail/Dark.ico'
-import dragon from '../img/iconDetail/Dragon.ico'
-import electric from '../img/iconDetail/Electric.ico'
-import fairy from '../img/iconDetail/Fairy.ico'
-import fighting from '../img/iconDetail/Fighting.ico'
-import fire from '../img/iconDetail/Fire.ico'
-import flying from '../img/iconDetail/Flying.ico'
-import ghost from '../img/iconDetail/Ghost.ico'
-import grass from '../img/iconDetail/Grass.ico'
-import ground from '../img/iconDetail/Ground.ico'
-import ice from '../img/iconDetail/Ice.ico'
-import normal from '../img/iconDetail/Normal.ico'
-import poison from '../img/iconDetail/Poison.ico'
-import psychic from '../img/iconDetail/Psychic.ico'
-import rock from '../img/iconDetail/Rock.ico'
-import steel from '../img/iconDetail/Steel.ico'
-import water from '../img/iconDetail/Water.ico'
-import exit from '../img/exitPokemon.png'
+import bug from '../../../img/iconDetail/Bug.ico'
+import dark from '../../../img/iconDetail/Dark.ico'
+import dragon from '../../../img/iconDetail/Dragon.ico'
+import electric from '../../../img/iconDetail/Electric.ico'
+import fairy from '../../../img/iconDetail/Fairy.ico'
+import fighting from '../../../img/iconDetail/Fighting.ico'
+import fire from '../../../img/iconDetail/Fire.ico'
+import flying from '../../../img/iconDetail/Flying.ico'
+import ghost from '../../../img/iconDetail/Ghost.ico'
+import grass from '../../../img/iconDetail/Grass.ico'
+import ground from '../../../img/iconDetail/Ground.ico'
+import ice from '../../../img/iconDetail/Ice.ico'
+import normal from '../../../img/iconDetail/Normal.ico'
+import poison from '../../../img/iconDetail/Poison.ico'
+import psychic from '../../../img/iconDetail/Psychic.ico'
+import rock from '../../../img/iconDetail/Rock.ico'
+import steel from '../../../img/iconDetail/Steel.ico'
+import water from '../../../img/iconDetail/Water.ico'
+import exit from '../../../img/exitPokemon.png'
 
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
@@ -35,13 +35,12 @@ import { Link } from "react-router-dom";
 import {
   getPokemonDetail,
   cleanCharacterDetail,
-} from "../redux/actions/actions";
+} from "../../../redux/actions/actions";
 
 const DetailPokemon = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const pokemonsDetails = useSelector((state) => state.pokemonsDetails);
-
   let name = { bug, dark, dragon, electric, fairy, fighting, fire, flying,ghost,grass, ground, ice, normal, poison, psychic, rock, steel, water  }
 
   useEffect(() => {
@@ -91,7 +90,6 @@ const DetailPokemon = () => {
             <div>
               <ul className="ulTypes">
                 {pokemonsDetails.types.map((type) =>{
-                  let value = type
                   return <li key={type}>{type} <img className="iconType" src={name[type]} alt="" /> </li>
                 }
                 )}

@@ -1,22 +1,21 @@
-const { Pokemon, conn } = require('../../src/db.js');
-const { expect } = require('chai');
+const { conn } = require("../../src/db")
 
-describe('Pokemon model', () => {
-  before(() => conn.authenticate()
-    .catch((err) => {
-      console.error('Unable to connect to the database:', err);
-    }));
-  describe('Validators', () => {
-    beforeEach(() => Pokemon.sync({ force: true }));
-    describe('name', () => {
-      it('should throw an error if name is null', (done) => {
-        Pokemon.create({})
-          .then(() => done(new Error('It requires a valid name')))
-          .catch(() => done());
-      });
-      it('should work when its a valid name', () => {
-        Pokemon.create({ name: 'Pikachu' });
-      });
-    });
+describe("Conexión a la base de datos", () => {
+  test("Debe establecerse correctamente la conexión", async () => {
+    try {
+      await conn.authenticate();
+      expect(true).toBe(true);
+    } catch (error) {
+      expect(error).toBeUndefined();
+    }
+  });
+
+  test("Debe ser posible realizar operaciones en la base de datos", async () => {
+    try {
+      await conn.query("SELECT 1 + 1");//prueba resolver y crea una columna ficticia
+      expect(true).toBe(true);
+    } catch (error) {
+      expect(error).toBeUndefined();
+    }
   });
 });

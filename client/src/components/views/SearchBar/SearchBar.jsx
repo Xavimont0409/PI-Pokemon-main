@@ -1,6 +1,6 @@
-import '../styles/SearchBar.css'
+import './SearchBar.css'
 import { useDispatch } from "react-redux";
-import { searchByName } from "../redux/actions/actions";
+import { searchByName } from "../../../redux/actions/actions";
 import { useState } from "react";
 
 const SearchBar = ({ setCurrentPag }) => {

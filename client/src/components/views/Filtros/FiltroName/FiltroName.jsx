@@ -1,6 +1,6 @@
-import '../styles/FiltroName.css'
+import './FiltroName.css'
 import { useDispatch } from "react-redux";
-import { filterPerName } from "../redux/actions/actions";
+import { filterPerName } from "../../../../redux/actions/actions";
 
 const FiltroName = ({ setCurrentPag, setOrderName }) => {
   const dispatch = useDispatch()

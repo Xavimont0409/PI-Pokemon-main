@@ -1,5 +1,5 @@
-import "../styles/LandingPage.css";
-import start from "../img/buttonStar.png";
+import "./LandingPage.css";
+import start from "../../../img/buttonStar.png";
 import { Link } from "react-router-dom";
 
 const LandingPage = () => {

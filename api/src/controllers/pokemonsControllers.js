@@ -111,7 +111,11 @@ const searchPokemonByName = async (name) => {
       return [poke];
     })
     .catch((error) => {
-      return error.message
+      if (error.response && error.response.status === 404) {
+        return [];
+      } else {
+        throw error;
+      }
     });
 
   return pokemonListApi.concat(pokemonsBddClean);

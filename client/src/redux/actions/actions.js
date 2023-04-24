@@ -31,7 +31,8 @@ export const getPokemonDetail = (id) => {
           type: GET_POKEMON_DETAIL,
           payload: data,
         });
-      });
+      })
+      .catch(error => error)
   };
 };
 
@@ -77,7 +78,7 @@ export const filterPerName = (payload) =>{
 
 export const searchByName = (name) =>{
   return async function (dispatch) {
-    try {
+    /* try {
       const json = await axios.get(`http://localhost:3001/pokemons?name=${name}`)
       const response = json.data;
       return dispatch({
@@ -85,8 +86,18 @@ export const searchByName = (name) =>{
         payload: response
       })
     } catch (error) {
-      return alert(error.response.data)
-    }
+      console.log(error);
+      return error.message
+    } */
+    axios(`http://localhost:3001/pokemons?name=${name}`)
+      .then(response => response.data)
+      .then(data => {
+        return dispatch({
+          type : SEARCH_BY_NAME,
+          payload: data
+        })
+      })
+      .catch(error => console.log(error))
   }
 }
 export const filterPerCreated = (payload) =>{

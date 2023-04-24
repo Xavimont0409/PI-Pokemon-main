@@ -1,16 +1,11 @@
-import "../styles/Navbar1.css";
-import SearchBar from "./SearchBar";
-import FiltroAttack from "./FiltroAttack";
-import FiltroName from "./FiltroName";
-import FilterTypes from "./FilterType";
-import FilterCreated from "./FilterCreated";
+import "./Navbar1.css";
+import SearchBar from "../SearchBar/SearchBar";
+import FiltroAttack from "../Filtros/FiltroAttack/FiltroAttack";
+import FiltroName from "../Filtros/FiltroName/FiltroName";
+import FilterTypes from "../Filtros/FiltroType/FilterType";
+import FilterCreated from "../Filtros/FiltroCreated/FilterCreated";
 
-const NavBar = ({
-  setCurrentPag,
-  setOrderRating,
-  orderRating,
-  setOrderName,
-}) => {
+const NavBar = ({setCurrentPag,setOrderRating,orderRating,setOrderName,}) => {
   return (
     <nav className="navbar">
       <div className="container-logo">
@@ -28,7 +23,7 @@ const NavBar = ({
             setCurrentPag={setCurrentPag}
             setOrderName={setOrderName}
           />
-          <FilterTypes />
+          <FilterTypes setCurrentPag={setCurrentPag}/>
           <FilterCreated setCurrentPag={setCurrentPag} />
         </div>
       </div>

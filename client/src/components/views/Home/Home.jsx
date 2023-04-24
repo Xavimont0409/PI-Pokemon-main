@@ -1,28 +1,25 @@
-import "../styles/Home.css";
-import exit from '../img/exitPokemon.png'
-import NavBar from "./NavBar";
-import PokeCards from "./PokeCards";
-import Paginado from "./Paginado";
+import "./Home.css";
+import exit from '../../../img/exitPokemon.png'
+import NavBar from '../Nav/NavBar'
+import PokeCards from "../../PokeCards/PokeCards";
+import Paginado from "../../Paginado/Paginado";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { getAllPokemons } from "../redux/actions/actions";
+import { getAllPokemons } from "../../../redux/actions/actions";
 import { useDispatch, useSelector } from "react-redux";
 
 const Home = () => {
   const dispatch = useDispatch();
   const allPokemons = useSelector((state) => state.allPokemons);
   const pokemons = useSelector((state) => state.pokemons);
+  
   const [orderRating, setOrderRating] = useState("");
   const [orderName, setOrderName] = useState("");
-
   const [currentPag, setCurrentPag] = useState(1);
   const [pokemonsPerPage, setPokemonsPerPage] = useState(12);
   const indexOfLastPokemon = currentPag * pokemonsPerPage;
   const indexOfFirstPokemon = indexOfLastPokemon - pokemonsPerPage;
-  const currentPokemons = pokemons.slice(
-    indexOfFirstPokemon,
-    indexOfLastPokemon
-  );
+  const currentPokemons = pokemons.slice(indexOfFirstPokemon,indexOfLastPokemon);
 
   useEffect(() => {
     if (allPokemons.length === 0) {
@@ -70,7 +67,7 @@ const Home = () => {
           />
         </div>
         <div>
-          <PokeCards props={currentPokemons} />
+          <PokeCards currentPokemons={currentPokemons} />
         </div>
       </div>
     </div>

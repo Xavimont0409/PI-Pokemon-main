@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { filterPerCreated } from "../redux/actions/actions";
+import { filterPerCreated } from "../../../../redux/actions/actions";
 
 const FilterCreated = ({ setCurrentPag }) => {
   const dispatch = useDispatch();
@@ -8,7 +8,6 @@ const FilterCreated = ({ setCurrentPag }) => {
     dispatch(filterPerCreated(event.target.value))
     setCurrentPag(1)
   }
-
 
   return (
     <div className="select-name">

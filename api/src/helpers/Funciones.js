@@ -1,3 +1,5 @@
+const axios = require('axios')
+
 const cleanTypesBdd = (array) => {
   return array.map((pokemon) => {
     return {

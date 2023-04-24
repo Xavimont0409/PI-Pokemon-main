@@ -1,6 +1,6 @@
-import '../styles/FiltroAttack.css'
+import './FiltroAttack.css'
 import { useDispatch } from "react-redux";
-import { filterPerAttack } from "../redux/actions/actions";
+import { filterPerAttack } from "../../../../redux/actions/actions";
 
 const FiltroAttack = ({ setCurrentPag, setOrderRating, orderRating }) => {
   const dispatch = useDispatch();

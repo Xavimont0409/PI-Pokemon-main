@@ -1,21 +1,21 @@
-//! FILTORR POR TYPO 
 import { useEffect } from "react";
-import { getAllTypes } from "../redux/actions/actions";
+import { getAllTypes } from "../../../../redux/actions/actions";
 import { useSelector, useDispatch } from 'react-redux'
-import { filterPerTypes } from "../redux/actions/actions";
+import { filterPerTypes } from "../../../../redux/actions/actions";
 
   
-const FilterTypes= () =>{
+const FilterTypes= ({setCurrentPag}) =>{
   const dispatch = useDispatch()
   const allTypes = useSelector((state) => state.allTypes)
 
   useEffect(()=>{
-    dispatch(getAllTypes())
+    if(allTypes.length === 0)dispatch(getAllTypes())
   },[dispatch])
 
   const handlerFilterTypes = (event) =>{
     event.preventDefault()
     dispatch(filterPerTypes(event.target.value))
+    setCurrentPag(1)
   }
 
   return (
