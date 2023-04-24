@@ -2,7 +2,7 @@
 
 .container-home {
   display: flex;
-  background-image: url(../../../img/Fondo.png);
+  background-image: url(../../../img/fondoHome.png);
 }
 .nav-paginado ul {
   display: flex;
