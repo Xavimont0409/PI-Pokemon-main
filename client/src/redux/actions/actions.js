@@ -7,7 +7,10 @@ import {
   FILTER_PER_ATTACK,
   FILTER_PER_NAME,
   SEARCH_BY_NAME,
-  FILTER_PER_CREATED
+  FILTER_PER_CREATED,
+  POST_POKEMONS,
+  DELETE_POKEMONS,
+  UPDATE_POKEMON
 } from "./actions-types";
 import axios from "axios";
 
@@ -78,26 +81,16 @@ export const filterPerName = (payload) =>{
 
 export const searchByName = (name) =>{
   return async function (dispatch) {
-    /* try {
-      const json = await axios.get(`http://localhost:3001/pokemons?name=${name}`)
-      const response = json.data;
-      return dispatch({
-        type: SEARCH_BY_NAME,
-        payload: response
-      })
-    } catch (error) {
-      console.log(error);
-      return error.message
-    } */
     axios(`http://localhost:3001/pokemons?name=${name}`)
       .then(response => response.data)
       .then(data => {
-        return dispatch({
+        data.length === 0 ? alert('Pokemon does not exist') :
+        dispatch({
           type : SEARCH_BY_NAME,
           payload: data
         })
       })
-      .catch(error => console.log(error))
+      .catch(error => error.response)
   }
 }
 export const filterPerCreated = (payload) =>{
@@ -111,7 +104,40 @@ export const filterPerCreated = (payload) =>{
 
 export const postPokemon = (payload)=>{
   return async function(dispatch){
-    const response = await axios.post("http://localhost:3001/pokemons/", payload)
-    return response
+    try {
+      const response = await axios.post("http://localhost:3001/pokemons/", payload)
+      return dispatch({
+        type : POST_POKEMONS,
+        payload : response.data
+      }) ? alert('creado') : response
+    } catch (error) {
+      return alert(error.response.data.error)
+    }
+  }
+}
+export const deletePokemon = (id) =>{
+  return async function (dispatch) {
+    try {
+      const response = await axios.delete(`http://localhost:3001/pokemons/${id}`)
+      return dispatch({
+        type: DELETE_POKEMONS,
+        payload: response
+      }) ? alert('Pokemon Eliminado') : response
+    } catch (error) {
+      return alert(error.response.data.error)
+    }
+  }
+}
+export const updatePokemon = (id, payload) =>{
+  return async function(dispatch){
+    axios.put(`http://localhost:3001/pokemons/${id}`, payload)
+    .then(response => {
+      alert('Pokemon actualizado')
+      return dispatch({
+        type: UPDATE_POKEMON,
+        payload: response
+      })
+    })
+    .catch(error => alert(error.response.data))
   }
 }

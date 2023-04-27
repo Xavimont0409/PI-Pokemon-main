@@ -1,4 +1,4 @@
-import "./FormPage.css";
+import "../FormPage/FormPage.css";
 //import iconos
 import iconCharmander from "../../img/iconForm/charmander.png";
 import iconAltura from "../../img/iconForm/altura.png";
@@ -11,28 +11,48 @@ import iconShield from "../../img/iconForm/shield.png";
 
 import { validate } from "../../validadoForm/validate";
 import { useState, useEffect } from "react";
-import { getAllPokemons, getAllTypes, postPokemon } from "../../redux/actions/actions";
+import {
+  getAllPokemons,
+  updatePokemon,
+  cleanCharacterDetail,
+  getPokemonDetail,
+} from "../../redux/actions/actions";
 import { useSelector, useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import PokeCard from "../PokeCard/PokeCard";
+import { useNavigate, useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 
-const FormPage = () => {
-  const [creatNewPokemon, setCreateNewPokemon] = useState({ name: "", image: "", life: "", attack: "", defense: "", speed: "", height: "", weight: "", types: [] });
-  const [error, setError] = useState({ name: "", image: "", life: "", attack: "", defense: "", speed: "", height:"", weight: "", types: [] });
+const UpdateForm = () => {
+  const pokeDetail = useSelector((state) => state.pokemonsDetails);
+  const [creatNewPokemon, setCreateNewPokemon] = useState({
+    name: pokeDetail.name,
+    image: pokeDetail.image,
+    life: pokeDetail.life,
+    attack: pokeDetail.attack,
+    defense: pokeDetail.defense,
+    speed: pokeDetail.speed,
+    height: pokeDetail.height,
+    weight: pokeDetail.weight,
+  });
+  const [error, setError] = useState({
+    name: "",
+    image: "",
+    life: "",
+    attack: "",
+    defense: "",
+    speed: "",
+    height: "",
+    weight: "",
+  });
 
-
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const dispatch = useDispatch();
-  const allTypes = useSelector((state) => state.allTypes);
-
+  const { id } = useParams();
 
   useEffect(() => {
-    if(allTypes.length === 0){
-      dispatch(getAllTypes());
-    }
-  }, [dispatch, allTypes]);
+    dispatch(getPokemonDetail(id));
 
+      return () => dispatch(cleanCharacterDetail());
+  }, [dispatch, id]);
 
   const handleInputChange = (event) => {
     const property = event.target.name;
@@ -42,32 +62,17 @@ const FormPage = () => {
     setError(validate({ ...creatNewPokemon, [property]: value }));
   };
 
-  const handleTypeChange = (event) => {
-    const value = event.target.value;
-    if (!creatNewPokemon.types.includes(value) && creatNewPokemon.types.length < 2) {
-      setCreateNewPokemon({
-        ...creatNewPokemon,
-        types: [...creatNewPokemon.types, value],
-      });
-    }else {
-      return alert('Solo se permiten 2 typos')
-    }
-  };
-
   const handleOnSubmit = (event) => {
     event.preventDefault();
     if (
       creatNewPokemon.name &&
       creatNewPokemon.image &&
       creatNewPokemon.life &&
-      creatNewPokemon.attack &&
-      creatNewPokemon.types.length !==0
-    ) {
-      dispatch(postPokemon(creatNewPokemon));
+      creatNewPokemon.attack 
+    ){
+      dispatch(updatePokemon(id, creatNewPokemon))
       dispatch(getAllPokemons())
       navigate('/home')
-    } else{
-      alert('Faltan datos')
     }
   };
 
@@ -182,39 +187,16 @@ const FormPage = () => {
             <img className="icons" src={iconBascula} alt="" />
             <p>{error.weight}</p>
           </div>
-          <div className="select-types">
-            <label>
-              <select onChange={(event) => handleTypeChange(event)}>
-                <option value="-">Types</option>
-                {allTypes.map((type) => (
-                  <option value={type.name} key={type.id}>
-                    {type.name}
-                  </option>
-                ))}
-              </select>
-              <span className="asterisco">*</span>
-            </label>
-            <div className="select_arrow2"></div>
-          </div>
-          <button className="buttonfrom" onClick={(event) => handleOnSubmit(event)}>
+          <button
+            className="buttonfrom"
+            onClick={(event) => handleOnSubmit(event)}
+          >
             AGREGAR
           </button>
-        </form>         
-      </div>
-      <div className="container-cardForm">
-        {creatNewPokemon.name && creatNewPokemon.image ? (
-          <PokeCard
-            id={0}
-            name={creatNewPokemon.name}
-            image={creatNewPokemon.image}
-            types={creatNewPokemon.types}
-          />
-        ) : (
-          <span className="loader">Loading</span>
-        )}
+        </form>
       </div>
     </div>
   );
 };
 
-export default FormPage;
+export default UpdateForm;

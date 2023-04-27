@@ -12,7 +12,7 @@ describe("Conexión a la base de datos", () => {
 
   test("Debe ser posible realizar operaciones en la base de datos", async () => {
     try {
-      await conn.query("SELECT 1 + 1");//prueba resolver y crea una columna ficticia
+      await conn.query("SELECT 1 + 1");
       expect(true).toBe(true);
     } catch (error) {
       expect(error).toBeUndefined();

@@ -3,6 +3,7 @@ import exit from '../../../img/exitPokemon.png'
 import NavBar from '../Nav/NavBar'
 import PokeCards from "../../PokeCards/PokeCards";
 import Paginado from "../../Paginado/Paginado";
+import Modal from "../../Modal/Modal";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { getAllPokemons } from "../../../redux/actions/actions";
@@ -64,10 +65,14 @@ const Home = () => {
             pokemons={pokemons.length}
             pokemonsPerPage={pokemonsPerPage}
             paginado={paginado}
+            currentPag={currentPag}
+            setCurrentPag={setCurrentPag}
           />
         </div>
         <div>
-          <PokeCards currentPokemons={currentPokemons} />
+          {
+            currentPokemons.length !== 0 ? <PokeCards currentPokemons={currentPokemons} /> : <Modal dispatch={dispatch} getAllPokemons={getAllPokemons} />
+          }          
         </div>
       </div>
     </div>

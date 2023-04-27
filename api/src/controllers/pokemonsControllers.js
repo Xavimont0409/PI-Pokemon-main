@@ -1,12 +1,16 @@
 const { Pokemon, Type } = require("../db.js");
 const {
   cleanTypesBdd,
-  searchPerNameApi
+  searchPerNameApi,
+  cleanObj
 } = require('../helpers/Funciones.js')
 const axios = require("axios");
 
 //* Agrega pokemon por post
 const addPosts = async (name, image, life, attack, defense, speed, height, weight, types) => {
+  const pokeFind = await Pokemon.findOne({where: {name : name}})
+  if(pokeFind) throw Error('This Pokemon already exists')
+
   const newUser = await Pokemon.create({ name, image, life, attack, defense, speed, height, weight});
   let typesBdd = await Type.findAll({ where: { name: types } });
   await newUser.addType(typesBdd);
@@ -16,22 +20,9 @@ const addPosts = async (name, image, life, attack, defense, speed, height, weigh
 //* Agrega pokemons por ID
 const getPokemonId = async (id, source) => {
   if (source === "api") {
-    const pokemonId = await axios.get(
-      `https://pokeapi.co/api/v2/pokemon/${id}`
-    );
+    const pokemonId = await axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`);
     const char = pokemonId.data;
-    const poke = {
-      id: char.id,
-      name: char.name,
-      image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${char.id}.png`,
-      life: char.stats[0].base_stat,
-      attack: char.stats[1].base_stat,
-      defense: char.stats[2].base_stat,
-      speed: char.stats[5].base_stat,
-      height: char.height,
-      weight: char.weight,
-      types: char.types.map((type) => type.type.name),
-    };
+    const poke = cleanObj(char)
     return poke;
   } else {
     const pokeId = await Pokemon.findAll({
@@ -94,19 +85,7 @@ const searchPokemonByName = async (name) => {
     .then((response) => {
       const pokeApiData = response.data;
 
-      const poke = {
-        id: pokeApiData.id,
-        name: pokeApiData.name,
-        image: pokeApiData.sprites.other["official-artwork"].front_default,
-        life: pokeApiData.stats[0].base_stat,
-        attack: pokeApiData.stats[1].base_stat,
-        defense: pokeApiData.stats[2].base_stat,
-        speed: pokeApiData.stats[5].base_stat,
-        height: pokeApiData.height,
-        weight: pokeApiData.weight,
-        types: pokeApiData.types.map((type) => type.type.name),
-        created: false,
-      };
+      const poke = cleanObj(pokeApiData)
 
       return [poke];
     })
@@ -121,9 +100,32 @@ const searchPokemonByName = async (name) => {
   return pokemonListApi.concat(pokemonsBddClean);
 };
 
+const deletePokemon = async (id) =>{
+  const delet = await Pokemon.findByPk(id)
+  delet.destroy()
+}
+const updatePokemon = async ( id, name, image, life, attack, defense, speed, height, weight, types)=>{
+  const findPokemonById = await Pokemon.findOne({
+    where: { id : id }
+  })
+  if(name) findPokemonById.name = name
+    if(image) findPokemonById.image = image
+    if(life) findPokemonById.life = life
+    if(attack) findPokemonById.attack = attack
+    if(defense) findPokemonById.defense = defense
+    if(speed) findPokemonById.speed = speed
+    if(height) findPokemonById.height = height
+    if(weight) findPokemonById.weight = weight
+    
+    const updatePokemon = await findPokemonById.save()
+    return updatePokemon
+}
+
 module.exports = {
   addPosts,
   getPokemonId,
   getAllPokemon,
   searchPokemonByName,
+  deletePokemon,
+  updatePokemon
 };

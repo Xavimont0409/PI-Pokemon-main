@@ -7,46 +7,46 @@ export const validate = (creatNewPokemon) => {
   let errors = {};
   //! VALIDACION NAME
   if (!creatNewPokemon.name)
-    errors.name = "El nombre de usuario no debe estar vacio";
+    errors.name = "Username must not be empty";
   else if (!regexName.test(creatNewPokemon.name))
-    errors.name = "Nombre no puede tener numero";
+    errors.name = "Cannot have numbers";
   else if (creatNewPokemon.name !== creatNewPokemon.name.toLowerCase())
-    errors.name = "El nombre no puede tener mayusculas";
+    errors.name = "Cannot have capital letters";
 
   //!Validacion link Image
   if (creatNewPokemon.image) {
     if (!regexImg.test(creatNewPokemon.image))
-      errors.image = "Tiene que ser un Link de Imagen";
+      errors.image = "It has to be an Image Link";
   }
 
   //! validacion vida
   if(creatNewPokemon.life){
-    if(!rexNum.test(creatNewPokemon.life)) errors.life= "Solo numeros"
+    if(!rexNum.test(creatNewPokemon.life)) errors.life= "Only numbers"
   }
 
   //!validacion attack
   if(creatNewPokemon.attack){
-    if(!rexNum.test(creatNewPokemon.attack)) errors.attack= "Solo numeros"
+    if(!rexNum.test(creatNewPokemon.attack)) errors.attack= "Only numbers"
   }
 
   //!validacion defense
   if(creatNewPokemon.defense){
-    if(!rexNum.test(creatNewPokemon.defense)) errors.defense = "solo numeros"
+    if(!rexNum.test(creatNewPokemon.defense)) errors.defense = "Only numbers"
   }  
 
   //!validacion spped
     if(creatNewPokemon.speed){
-      if(!rexNum.test(creatNewPokemon.speed)) errors.speed = "solo numeros"
+      if(!rexNum.test(creatNewPokemon.speed)) errors.speed = "Only numbers"
     }  
 
   //!validacion height
   if(creatNewPokemon.height){
-    if(!rexNum.test(creatNewPokemon.height)) errors.height = "solo numeros"
+    if(!rexNum.test(creatNewPokemon.height)) errors.height = "Only numbers"
   }  
 
   //!validacion weight
   if(creatNewPokemon.weight){
-    if(!rexNum.test(creatNewPokemon.weight)) errors.weight= "solo numeros"
+    if(!rexNum.test(creatNewPokemon.weight)) errors.weight= "Only numbers"
   }
 
   return errors;

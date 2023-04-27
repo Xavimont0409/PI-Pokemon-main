@@ -30,15 +30,18 @@ import exit from '../../../img/exitPokemon.png'
 
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import {
   getPokemonDetail,
   cleanCharacterDetail,
+  deletePokemon,
+  getAllPokemons
 } from "../../../redux/actions/actions";
 
 const DetailPokemon = () => {
   const { id } = useParams();
+  const navigate = useNavigate()
   const dispatch = useDispatch();
   const pokemonsDetails = useSelector((state) => state.pokemonsDetails);
   let name = { bug, dark, dragon, electric, fairy, fighting, fire, flying,ghost,grass, ground, ice, normal, poison, psychic, rock, steel, water  }
@@ -49,7 +52,12 @@ const DetailPokemon = () => {
     return () => dispatch(cleanCharacterDetail());
   }, [dispatch, id]);
 
-  return (
+  const hanlderDelete = (id)=>{
+    dispatch(deletePokemon(id))
+    dispatch(getAllPokemons())
+    navigate('/home')
+  }
+  return ( 
     <div className="container-detail">
       <Link to="/home">
       <img className="exit-img2" src={exit} alt="" />
@@ -59,6 +67,9 @@ const DetailPokemon = () => {
           <div className="conImgName">
             <img src={pokemonsDetails.image} alt={pokemonsDetails.name} />
             <h1>{pokemonsDetails.name}</h1>
+            {
+              pokemonsDetails.created === true ? (<div className="div-button"><button className="button-detail" onClick={()=>hanlderDelete(id)}>Delete</button><Link to={`/create/${id}`}><button className="button-detail">Update</button></Link></div>) : <div></div>
+            }
           </div>
           <div className="container-description">
             <div className="description">
@@ -98,7 +109,7 @@ const DetailPokemon = () => {
           </div>
         </div>
       ) : (
-        <p></p>
+        <span className="loader">Loading</span>
       )}
     </div>
   );

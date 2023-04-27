@@ -8,7 +8,9 @@ import {
   FILTER_PER_NAME,
   SEARCH_BY_NAME,
   FILTER_PER_CREATED,
-  POST_POKEMONS
+  POST_POKEMONS,
+  DELETE_POKEMONS,
+  UPDATE_POKEMON
 } from "./actions/actions-types";
 
 const initialState = {
@@ -20,8 +22,8 @@ const initialState = {
 };
 
 const reducer = (state = initialState, action) => {
-  //const pokemons = state.pokemons
   const allPokemons = state.allPokemons;
+  const aux = state.auxAllPokemons;
   switch (action.type) {
     case GET_ALL_POKEMONS:
       return {
@@ -61,7 +63,6 @@ const reducer = (state = initialState, action) => {
       };
 
     case FILTER_PER_NAME:
-      const aux = state.auxAllPokemons;
       const filterPerName = allPokemons.sort((pokeA, pokeB) => {
         if (action.payload === "up")
           return pokeA.name.toLowerCase() < pokeB.name.toLowerCase() ? -1 : 0;
@@ -79,11 +80,10 @@ const reducer = (state = initialState, action) => {
       };
 
     case FILTER_PER_CREATED:
-      const aux2 = state.auxAllPokemons;
       const filterPerCreated = state.allPokemons.filter((elem) => elem.created.toString() === action.payload.toString());
       return {
         ...state,
-        pokemons: action.payload === "All" ? aux2 : filterPerCreated,
+        pokemons: action.payload === "All" ? aux : filterPerCreated,
       };
 
     case GET_ALL_TYPES:
@@ -94,9 +94,16 @@ const reducer = (state = initialState, action) => {
     
     case POST_POKEMONS:
       return {
-        ...state
+        ...state,
       }
-
+    case DELETE_POKEMONS:
+      return {
+        ...state
+      }  
+    case UPDATE_POKEMON:
+      return{
+        ...state
+      }  
     default:
       return {
         ...state,

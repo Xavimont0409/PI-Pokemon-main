@@ -11,7 +11,7 @@ const SearchBar = ({ setCurrentPag }) => {
     setName(event.target.value)
   };
   const searchName = (name) =>{
-    dispatch(searchByName(name));
+    dispatch(searchByName(name))
     setCurrentPag(1)
   }
 
