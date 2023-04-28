@@ -104,11 +104,11 @@ const deletePokemon = async (id) =>{
   const delet = await Pokemon.findByPk(id)
   delet.destroy()
 }
-const updatePokemon = async ( id, name, image, life, attack, defense, speed, height, weight, types)=>{
+const updatePokemon = async ( id, name, image, life, attack, defense, speed, height, weight )=>{
   const findPokemonById = await Pokemon.findOne({
     where: { id : id }
   })
-  if(name) findPokemonById.name = name
+    if(name) findPokemonById.name = name
     if(image) findPokemonById.image = image
     if(life) findPokemonById.life = life
     if(attack) findPokemonById.attack = attack

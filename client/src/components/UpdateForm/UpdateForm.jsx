@@ -73,6 +73,8 @@ const UpdateForm = () => {
       dispatch(updatePokemon(id, creatNewPokemon))
       dispatch(getAllPokemons())
       navigate('/home')
+    }else{
+      alert('Faltan datos')
     }
   };
 
@@ -85,7 +87,7 @@ const UpdateForm = () => {
       </div>
       <div className="container-form">
         <form className="form">
-          <h3 className="name-form">Create Pokemon</h3>
+          <h3 className="name-form">Update Pokemon</h3>
           <div className="input-name">
             <label htmlFor="name">Name</label>
             <input
@@ -191,7 +193,7 @@ const UpdateForm = () => {
             className="buttonfrom"
             onClick={(event) => handleOnSubmit(event)}
           >
-            AGREGAR
+            UPDATE
           </button>
         </form>
       </div>

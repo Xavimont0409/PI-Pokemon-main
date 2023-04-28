@@ -16,12 +16,16 @@ import axios from "axios";
 
 export const getAllPokemons = () => {
   return async function (dispatch) {
-    const json = await axios.get("http://localhost:3001/pokemons");
-    const data = json.data;
-    return dispatch({
-      type: GET_ALL_POKEMONS,
-      payload: data,
-    });
+    try {
+      const json = await axios.get("http://localhost:3001/pokemons");
+      const data = json.data;
+      return dispatch({
+        type: GET_ALL_POKEMONS,
+        payload: data,
+      });
+    } catch (error) {
+      alert(error.response.data.error)
+    }
   };
 };
 

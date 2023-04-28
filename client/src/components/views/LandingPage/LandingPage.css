@@ -26,7 +26,7 @@
   transition: all 0.2s;
 }
 .start-button:hover{
-  width: 220px;
+  width: 190px;
 }.start-button:active{
   width: 180px;
 }

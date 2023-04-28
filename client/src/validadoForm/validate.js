@@ -1,8 +1,8 @@
 export const validate = (creatNewPokemon) => {
   let regexName = /^[a-z]+$/;
-  let regexImg =
-    /^https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_\+.~#?&\/=]*)$/;
+  let regexImg =/.(gif|jpeg|jpg|png)$/i;
   let rexNum = /^([0-9])*$/;  
+  /* if(!/.(gif|jpeg|jpg|png)$/i.test(dogData.image)) errors.image = "Supported extensions: JPEG, JPG and PNG"; */
 
   let errors = {};
   //! VALIDACION NAME
@@ -22,31 +22,42 @@ export const validate = (creatNewPokemon) => {
   //! validacion vida
   if(creatNewPokemon.life){
     if(!rexNum.test(creatNewPokemon.life)) errors.life= "Only numbers"
+    if(creatNewPokemon.life <= 0) errors.life = "cannot be less than or equal to 0"
   }
 
   //!validacion attack
   if(creatNewPokemon.attack){
     if(!rexNum.test(creatNewPokemon.attack)) errors.attack= "Only numbers"
+    if(creatNewPokemon.attack <= 0) errors.attack = "cannot be less than or equal to 0"
+
   }
 
   //!validacion defense
   if(creatNewPokemon.defense){
     if(!rexNum.test(creatNewPokemon.defense)) errors.defense = "Only numbers"
+    if(creatNewPokemon.defense <= 0) errors.defense = "cannot be less than or equal to 0"
+
   }  
 
   //!validacion spped
     if(creatNewPokemon.speed){
       if(!rexNum.test(creatNewPokemon.speed)) errors.speed = "Only numbers"
+    if(creatNewPokemon.speed <= 0) errors.speed = "cannot be less than or equal to 0"
+
     }  
 
   //!validacion height
   if(creatNewPokemon.height){
     if(!rexNum.test(creatNewPokemon.height)) errors.height = "Only numbers"
+    if(creatNewPokemon.height <= 0) errors.height = "cannot be less than or equal to 0"
+
   }  
 
   //!validacion weight
   if(creatNewPokemon.weight){
     if(!rexNum.test(creatNewPokemon.weight)) errors.weight= "Only numbers"
+    if(creatNewPokemon.weight <= 0) errors.weight = "cannot be less than or equal to 0"
+
   }
 
   return errors;
