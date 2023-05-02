@@ -8,6 +8,7 @@ export const validate = (creatNewPokemon) => {
   //! VALIDACION NAME
   if (!creatNewPokemon.name)
     errors.name = "Username must not be empty";
+  else if(creatNewPokemon.name.length >= 15) errors.name= "No puede tener mas de 15 caracteres"
   else if (!regexName.test(creatNewPokemon.name))
     errors.name = "Cannot have numbers";
   else if (creatNewPokemon.name !== creatNewPokemon.name.toLowerCase())
