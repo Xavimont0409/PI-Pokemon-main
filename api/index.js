@@ -6,7 +6,7 @@ const PORT = 3001
 
 // Syncing all the models at once.
 conn.sync({ alter: true }).then(() => {
-  server.listen(`${PORT}`, () => {
+  server.listen(`${PORT}`, "0.0.0.0", () => {
     console.log(`listenig to ${PORT}`); // eslint-disable-line no-console
   });
 });
